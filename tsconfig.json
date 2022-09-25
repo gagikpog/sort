@@ -3,7 +3,7 @@
       "allowJs": true,
       "checkJs": true,
       "outDir": "dist",
-      "sourceMap": true,
+      "sourceMap": false,
       "target": "ES6",
       "noImplicitAny": true,
       "noImplicitReturns": true,

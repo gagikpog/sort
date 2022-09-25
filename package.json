@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && npm run build:cp-public",
-    "watch": "tsc --watch && npm run build:cp-public",
-    "build:cp-public": "cp ./public/** ./dist",
+    "watch": "npm run build:cp-public && tsc --watch",
+    "build:cp-public": "cp -R ./public/. ./dist/",
     "type": "tsc --noEmit"
   },
   "author": "",
