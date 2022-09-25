@@ -1,6 +1,13 @@
 import { Sort } from "./sorting.js";
 
-export class SortAdapter {
+interface ISortAdapter {
+    length: number;
+    get: (index: number) => number;
+    set: (index: number, value: number) => Promise<boolean>;
+    swap: (index1: number, index2: number) => Promise<boolean>;
+}
+
+export class SortAdapter implements ISortAdapter {
 
     private _sort: Sort;
 
@@ -15,6 +22,7 @@ export class SortAdapter {
     }
 
     get(index: number): number {
+        this._checkIsDestroy();
         this._checkLoading();
         const data = this._sort.getData();
         this._validateIndex(index);
@@ -23,8 +31,10 @@ export class SortAdapter {
     }
 
     set(index: number, value: number): Promise<boolean> {
+        this._checkIsDestroy();
         this._checkLoading();
         return this._timeResolver().then(() => {
+            this._checkIsDestroy();
             const data = this._sort.getData();
             this._validateIndex(index);
             data[index] = value;
@@ -34,8 +44,10 @@ export class SortAdapter {
     }
 
     swap(index1: number, index2: number): Promise<boolean> {
+        this._checkIsDestroy();
         this._checkLoading();
         return this._timeResolver().then(() => {
+            this._checkIsDestroy();
             const data = this._sort.getData();
             this._validateIndex(index1);
             this._validateIndex(index2);
@@ -56,6 +68,12 @@ export class SortAdapter {
     private _checkLoading(): void {
         if (this._loading) {
             throw new Error('Wait for the operation to complete');
+        }
+    }
+
+    private _checkIsDestroy(): void {
+        if (this._sort.isDestroyed()) {
+            throw new Error('Stopped');
         }
     }
 

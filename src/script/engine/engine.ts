@@ -18,12 +18,17 @@ export class Engine {
     }
 
     destroy() {
+        this._sorting.destroy();
         this._view.destroy();
     }
 
     sort(sorter: (adapter: SortAdapter) => Promise<boolean>) {
         sorter(this._sorting.getAdapter()).then(() => {
-
+            // TODO: check is sorted.
+        }).catch((err: Error) => {
+            if (err.message !== 'Stopped') {
+                // TODO: write message to informer.
+            }
         });
     }
 }

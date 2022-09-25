@@ -10,7 +10,9 @@ export class Sort {
 
     private _subscribers: {[key: string]: () => void;} = {};
 
-    private _lastKey = 0;
+    private _lastKey: number = 0;
+
+    private _destroyed: boolean = false;
 
     constructor(cfg: ISortCfg) {
         this._generateArray(cfg.size);
@@ -50,5 +52,15 @@ export class Sort {
 
     getData(): number[] {
         return this._array;
+    }
+
+    destroy() {
+        this._subscribers = {};
+        this._array = [];
+        this._destroyed = true;
+    }
+
+    isDestroyed() {
+        return this._destroyed;
     }
 }

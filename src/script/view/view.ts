@@ -26,7 +26,7 @@ export class View {
 
     private _initDisplay() {
         this._ctx.canvas.width = window.innerWidth - 20;
-        this._ctx.canvas.height = window.innerHeight - 20;
+        this._ctx.canvas.height = window.innerHeight - 40;
     }
 
     destroy() {
@@ -36,6 +36,7 @@ export class View {
     }
 
     draw() {
+        this._ctx.fillStyle = '#fff';
         const width = this._ctx.canvas.width;
         const height = this._ctx.canvas.height;
         this._ctx.clearRect(0, 0, width, height);
