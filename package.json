@@ -1,0 +1,18 @@
+{
+  "name": "sorting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run build:cp-public",
+    "watch": "tsc --watch && npm run build:cp-public",
+    "build:cp-public": "cp ./public/** ./dist",
+    "type": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^4.8.3"
+  }
+}
